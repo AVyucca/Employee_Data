@@ -1,0 +1,30 @@
+.employee-list {
+    margin: 20px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+}
+
+.employee-item {
+    padding: 10px;
+    border-bottom: 1px solid #eee;
+}
+
+.employee-item:last-child {
+    border-bottom: none;
+}
+
+.employee-name {
+    font-weight: bold;
+    font-size: 1.2em;
+}
+
+.employee-position {
+    color: #666;
+}
+
+.employee-department {
+    font-style: italic;
+    color: #999;
+}
