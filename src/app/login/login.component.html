@@ -1,0 +1,24 @@
+<div class="login-background">
+  <div class="login-wrapper">
+    <div class="login-card">
+      <h1 class="brand-title">EmpHub</h1>
+      <p class="card-subtitle">Welcome! Please sign in below</p>
+      <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+        <div class="form-group">
+          <input formControlName="email" type="email" placeholder="Email address" />
+          <div class="error" *ngIf="submitted && loginForm.controls.email.errors">
+            Email is required
+          </div>
+        </div>
+        <div class="form-group">
+          <input formControlName="password" type="password" placeholder="Password (alphanumeric)" />
+          <div class="error" *ngIf="submitted && loginForm.controls.password.errors">
+            Password is required and alphanumeric
+          </div>
+        </div>
+        <button type="submit" [disabled]="loginForm.invalid">Login</button>
+      </form>
+    </div>
+  </div>
+</div>
+
