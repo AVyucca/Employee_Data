@@ -1,0 +1,34 @@
+<div class="view-container">
+  <h2>Employee Details</h2>
+  
+  <div *ngIf="isLoading">Loading...</div>
+  <div *ngIf="errorMessage">{{ errorMessage }}</div>
+  
+  <table *ngIf="!isLoading && employees.length">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>DOB</th>
+        <th>Mobile</th>
+        <th>Joining Date</th>
+        <th>PAN</th>
+        <th>Aadhar</th>
+        <th>Bank Details</th>
+        <th>Salary</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let emp of employees">
+        <td>{{ emp.name }}</td>
+        <td>{{ emp.dob }}</td>
+        <td>{{ emp.mobile }}</td>
+        <td>{{ emp.joiningDate }}</td>
+        <td>{{ emp.pan }}</td>
+        <td>{{ emp.aadhar }}</td>
+        <td>{{ emp.bankDetails }}</td>
+        <td>{{ emp.salary }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+

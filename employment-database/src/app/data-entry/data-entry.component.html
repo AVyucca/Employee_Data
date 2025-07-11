@@ -1,0 +1,60 @@
+<div class="entry-container">
+  <h2>Add New Record</h2>
+  <form [formGroup]="entryForm" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+      <label>Full Name</label>
+      <input formControlName="name" type="text" required />
+    </div>
+
+    <div class="form-group">
+      <label>Date of Birth</label>
+      <input formControlName="dob" type="date" required />
+    </div>
+
+    <div class="form-group">
+      <label>Mobile Number</label>
+      <input formControlName="mobile" type="tel" required />
+    </div>
+
+    <div class="form-group">
+      <label>Joining Date</label>
+      <input formControlName="joiningDate" type="date" required />
+    </div>
+
+    <div class="form-group">
+      <label>PAN Number</label>
+      <input formControlName="pan" type="text" required />
+    </div>
+
+    <div class="form-group">
+      <label>Aadhaar Number</label>
+      <input formControlName="aadhaar" type="text" required />
+    </div>
+
+    <div class="form-group">
+      <label>Bank Account Number</label>
+      <input formControlName="bankAccount" type="text" required />
+    </div>
+
+    <div class="form-group">
+      <label>Department</label>
+      <input formControlName="department" type="text" required />
+    </div>
+
+    <div class="form-group">
+      <label>Role</label>
+      <input formControlName="role" type="text" required />
+    </div>
+
+    <div class="form-group">
+      <label>Salary</label>
+      <input formControlName="salary" type="number" required />
+    </div>
+
+    <div class="button-group">
+      <button type="submit" [disabled]="entryForm.invalid">Save</button>
+      <button type="button" class="cancel-btn" (click)="onCancel()">Cancel</button>
+    </div>
+  </form>
+</div>
+

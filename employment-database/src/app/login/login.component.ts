@@ -11,30 +11,35 @@ export class LoginComponent implements OnInit {
   loginForm!: FormGroup;
   submitted = false;
 
-  constructor(private fb: FormBuilder, private router: Router) {}
+  constructor(private formBuilder: FormBuilder, private router: Router) { }
 
   ngOnInit(): void {
-    this.loginForm = this.fb.group({
+    this.loginForm = this.formBuilder.group({
       email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required, Validators.pattern(/^[a-zA-Z0-9]{6,}$/)]]
+      password: ['', [Validators.required, Validators.pattern(/^[a-zA-Z0-9]*$/)]],
+      role: ['', Validators.required]
     });
   }
 
-  get f() {
-    return this.loginForm.controls;
-  }
+  get f() { return this.loginForm.controls; }
 
-  onSubmit() {
+  onSubmit(): void {
     this.submitted = true;
 
-    if (this.loginForm.invalid) return;
+    if (this.loginForm.invalid) {
+      return;
+    }
 
-    const { email, password } = this.loginForm.value;
-    if (email === 'admin@example.com' && password === 'admin123') {
-      this.router.navigate(['/hub']);
+    const role = this.loginForm.value.role;
+
+    if (role === 'admin') {
+      this.router.navigate(['/admin-dashboard']);
+    } else if (role === 'employee') {
+      this.router.navigate(['/employee-dashboard']);
     } else {
-      alert('Invalid credentials');
+      console.error('Unknown role selected');
     }
   }
 }
+
 
