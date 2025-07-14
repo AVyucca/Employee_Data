@@ -1,0 +1,130 @@
+/* Page Background */
+.emp-register-wrapper {
+  background-color: #f8f9fb;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+/* White Card */
+.emp-register-card {
+  background-color: #ffffff;
+  padding: 40px 30px;
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  max-width: 400px;
+  width: 100%;
+  text-align: center;
+  animation: fadeIn 0.4s ease-in-out;
+}
+
+/* Animation for smooth entrance */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Title */
+.emp-register-card h2 {
+  font-size: 2rem;
+  color: #2957a4;
+  margin-bottom: 20px;
+  font-weight: 700;
+}
+
+/* Form Layout */
+.emp-register-card form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* Form Groups */
+.form-group {
+  text-align: left;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 6px;
+  color: #333;
+  font-weight: 500;
+}
+
+.form-group input,
+.form-group select {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 1rem;
+  background-color: #f3f4f6;
+  color: #111827;
+  transition: border-color 0.3s, background-color 0.3s;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+  border-color: #2563eb;
+  background-color: #e5e7eb;
+  outline: none;
+}
+
+/* Required star styling */
+.required-star {
+  color: red;
+  margin-left: 2px;
+  font-weight: bold;
+}
+
+/* Error Message */
+.error {
+  color: #dc2626;
+  font-size: 0.85rem;
+  margin-top: 4px;
+}
+
+/* Button Group */
+.button-group {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 12px;
+}
+
+.button-group button {
+  width: 100%;
+  padding: 12px 0;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  color: #ffffff;
+  background: linear-gradient(90deg, #2563eb, #f59e0b);
+  transition: opacity 0.3s, transform 0.2s;
+}
+
+.button-group button:hover {
+  opacity: 0.95;
+  transform: translateY(-1px);
+}
+
+.button-group button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* Cancel Button Style */
+.button-group .cancel-btn {
+  background-color: #ccc;
+  color: #333;
+  font-weight: 500;
+}
+
+.button-group .cancel-btn:hover {
+  background-color: #b3b3b3;
+  opacity: 1;
+}

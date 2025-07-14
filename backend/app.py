@@ -1,6 +1,7 @@
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 import mysql.connector
+import hashlib
 
 app = Flask(__name__)
 CORS(app)
@@ -13,13 +14,30 @@ db_config = {
     'database': 'employeedata'
 }
 
+try:
+    conn = mysql.connector.connect(**db_config)
+    cursor = conn.cursor()
+    cursor.execute("SELECT DATABASE();")
+    result = cursor.fetchone()
+    print(f"✅ Connected to database: {result[0]}")
+    cursor.close()
+    conn.close()
+except Exception as e:
+    print("❌ Connection failed:", e)
+
 def get_db_connection():
     return mysql.connector.connect(**db_config)
 
 # ---------------------------
+# Root
+# ---------------------------
+@app.route('/')
+def home():
+    return 'Flask backend is running!'
+
+# ---------------------------
 # Department Endpoints
 # ---------------------------
-
 @app.route('/api/departments', methods=['GET'])
 def get_departments():
     conn = get_db_connection()
@@ -55,7 +73,6 @@ def create_department():
 # ---------------------------
 # Role Endpoints
 # ---------------------------
-
 @app.route('/api/roles', methods=['GET'])
 def get_roles():
     conn = get_db_connection()
@@ -91,7 +108,6 @@ def create_role():
 # ---------------------------
 # Employee Endpoints
 # ---------------------------
-
 @app.route('/api/employees', methods=['GET'])
 def get_employees():
     conn = get_db_connection()
@@ -112,7 +128,6 @@ def create_employee():
         'BankAccountNumber', 'BankName', 'IFSCCode', 'BranchName',
         'DepartmentID', 'RoleID', 'ManagerID', 'ProfileID'
     ]
-
     values = [data.get(f) for f in fields]
 
     conn = get_db_connection()
@@ -131,7 +146,6 @@ def create_employee():
 # ---------------------------
 # EmployeeSalary Endpoints
 # ---------------------------
-
 @app.route('/api/employeesalary', methods=['GET'])
 def get_employee_salaries():
     conn = get_db_connection()
@@ -169,18 +183,76 @@ def create_employee_salary():
     conn.close()
 
     return jsonify({'SalaryID': salary_id})
+
+# ---------------------------
+# EmpRegister Endpoints
+# ---------------------------
+@app.route('/api/emp-register', methods=['POST'])
+def emp_register():
+    data = request.get_json()
+
+    required_fields = ['name', 'dob', 'mobile', 'joiningDate', 'pan', 'aadhaar', 'email', 'password', 'department', 'role']
+    missing = [f for f in required_fields if not data.get(f)]
+    if missing:
+        return jsonify({'error': f'Missing required fields: {", ".join(missing)}'}), 400
+
+    # ✅ Hash the password before storing
+    password_raw = data.get('password')
+    hashed_password = hashlib.sha256(password_raw.encode()).hexdigest()
+
+    conn = get_db_connection()
+    cursor = conn.cursor()
+    sql = """
+        INSERT INTO EmployeeRegister
+        (Name, DOB, Mobile, JoiningDate, PAN, Aadhaar, BankAccount, Department, Role, Email, Password)
+        VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
+    """
+    values = (
+        data.get('name'),
+        data.get('dob'),
+        data.get('mobile'),
+        data.get('joiningDate'),
+        data.get('pan'),
+        data.get('aadhaar'),
+        data.get('bankAccount'),  # optional
+        data.get('department'),
+        data.get('role'),
+        data.get('email'),
+        hashed_password
+    )
+    cursor.execute(sql, values)
+    conn.commit()
+    new_id = cursor.lastrowid
+    cursor.close()
+    conn.close()
+
+    return jsonify({'message': 'Employee registered successfully!', 'EmployeeRegisterID': new_id})
+
+@app.route('/api/emp-register', methods=['GET'])
+def get_registered_employees():
+    conn = get_db_connection()
+    cursor = conn.cursor(dictionary=True)
+    cursor.execute('SELECT * FROM EmployeeRegister')
+    results = cursor.fetchall()
+    cursor.close()
+    conn.close()
+    return jsonify(results)
+
+# ---------------------------
+# PingDB
+# ---------------------------
 @app.route('/api/pingdb')
 def ping_db():
     try:
         conn = get_db_connection()
         cursor = conn.cursor()
         cursor.execute('SELECT 1')
+        result = cursor.fetchone()
         cursor.close()
         conn.close()
-        return jsonify({'status': 'success'})
+        return jsonify({'status': 'success', 'result': result[0]})
     except Exception as e:
         return jsonify({'status': 'error', 'message': str(e)})
-
 
 # ---------------------------
 # Main

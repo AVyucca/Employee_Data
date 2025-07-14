@@ -113,3 +113,21 @@ button:disabled {
     font-size: 32px;
   }
 }
+.signup-link {
+  margin-top: 20px;
+  text-align: center;
+  font-size: 14px;
+  color: #6b7280;
+}
+
+.signup-link a {
+  color: #2563eb;
+  font-weight: 600;
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+.signup-link a:hover {
+  color: #1d4ed8;
+  text-decoration: underline;
+}

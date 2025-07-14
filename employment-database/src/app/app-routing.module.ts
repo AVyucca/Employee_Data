@@ -6,15 +6,17 @@ import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.compo
 import { EmployeeDashboardComponent } from './employee-dashboard/employee-dashboard.component';
 import { DataEntryComponent } from './data-entry/data-entry.component';
 import { DataViewComponent } from './data-view/data-view.component';
-import { UserProfileComponent } from './user-profile/user-profile.component'; // ✅ Add this import
+import { UserProfileComponent } from './user-profile/user-profile.component';
+import { EmpRegisterComponent } from './emp-register/emp-register.component';
 
 const routes: Routes = [
   { path: '', component: LoginComponent },
   { path: 'admin-dashboard', component: AdminDashboardComponent },
   { path: 'employee-dashboard', component: EmployeeDashboardComponent },
   { path: 'add-entry', component: DataEntryComponent },
-  { path: 'view-data', component: DataViewComponent },
-  { path: 'user-profile', component: UserProfileComponent } // ✅ Add this route
+  { path: 'view-entry', component: DataViewComponent },
+  { path: 'user-profile', component: UserProfileComponent },
+  { path: 'emp-register', component: EmpRegisterComponent },
 ];
 
 @NgModule({
@@ -22,4 +24,6 @@ const routes: Routes = [
   exports: [RouterModule]
 })
 export class AppRoutingModule { }
+
+
 

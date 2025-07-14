@@ -1,45 +1,101 @@
 body {
   margin: 0;
+  background-color: #f3f4f6;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background-color: #f8f9fb;
   color: #333;
 }
 
-.dashboard-container {
-  max-width: 400px;
-  margin: 80px auto;
-  padding: 2rem;
+.dashboard-background {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #f3f4f6;
+}
+
+.dashboard-card {
   background-color: #ffffff;
-  border-radius: 12px;
-  box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+  padding: 40px 30px;
+  border-radius: 16px;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+  max-width: 400px;
+  width: 100%;
   text-align: center;
+  animation: fadeIn 0.4s ease-in-out;
 }
 
-.dashboard-container h1 {
-  color: #007bff;
-  margin-bottom: 1rem;
-  font-size: 2rem;
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
-.dashboard-container p.subtitle {
-  color: #555;
-  margin-bottom: 2rem;
-  font-size: 1rem;
+.dashboard-title {
+  font-size: 40px;
+  font-weight: 800;
+  margin-bottom: 8px;
+  color: #2563eb;
 }
 
-.dashboard-container button {
-  padding: 12px 24px;
-  margin-top: 20px;
-  font-size: 1rem;
-  color: white;
-  background: linear-gradient(90deg, #007bff, #ff8c00);
+.dashboard-subtitle {
+  font-size: 16px;
+  color: #6b7280;
+  margin-bottom: 30px;
+}
+
+.dashboard-button {
+  width: 100%;
+  padding: 12px;
+  margin-top: 16px;
+  background: linear-gradient(90deg, #2563eb, #f59e0b);
+  color: #ffffff;
   border: none;
   border-radius: 8px;
+  font-size: 16px;
+  font-weight: 600;
   cursor: pointer;
-  transition: background 0.3s ease, transform 0.2s ease;
+  transition: opacity 0.3s, transform 0.2s;
 }
 
-.dashboard-container button:hover {
-  background: linear-gradient(90deg, #0056b3, #e67300);
-  transform: scale(1.05);
+.dashboard-button:hover {
+  opacity: 0.95;
+  transform: translateY(-1px);
+}
+
+.error {
+  color: #dc2626;
+  margin-top: 16px;
+  font-size: 14px;
+}
+
+.employee-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+.employee-table th,
+.employee-table td {
+  padding: 10px;
+  border-bottom: 1px solid #e5e7eb;
+  text-align: left;
+}
+
+.employee-table th {
+  background-color: #f3f4f6;
+  color: #2563eb;
+  font-weight: 600;
+}
+
+.employee-table td {
+  color: #333;
+}
+
+@media (max-width: 480px) {
+  .dashboard-card {
+    padding: 30px 20px;
+  }
+
+  .dashboard-title {
+    font-size: 32px;
+  }
 }

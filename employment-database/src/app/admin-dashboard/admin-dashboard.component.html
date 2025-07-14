@@ -1,7 +1,11 @@
-<div class="dashboard-container">
-  <h1>EmpHub - Admin Panel</h1>
-  <p>Welcome Admin! Manage your company’s employee data easily.</p>
+<div class="admin-dashboard-wrapper">
+  <div class="admin-card">
+    <h1>EmpHub - Admin Panel</h1>
+    <p class="subtitle">
+      Welcome Admin! Manage your company's employee data easily.
+    </p>
 
-  <button class="dashboard-btn" (click)="navigateTo('data-view')">View Employees</button>
-  <button class="dashboard-btn" (click)="navigateTo('data-entry')">Add Employee</button>
+    <button routerLink="/view-entry">View Employees</button>
+    <button routerLink="/add-entry">Add Employee</button>
+  </div>
 </div>

@@ -1,11 +1,38 @@
-<div class="profile-card">
-  <h2 class="title">Employee Details</h2>
-  <div class="info">
-    <p><strong>Name:</strong> {{ employee.name }}</p>
-    <p><strong>Department:</strong> {{ employee.department }}</p>
-    <p><strong>Role:</strong> {{ employee.role }}</p>
-    <p><strong>Phone No.:</strong> {{ employee.phone }}</p>
-    <p><strong>Email:</strong> {{ employee.email }}</p>
+<div class="profile-wrapper" *ngIf="employee">
+  <h2 style="color: #f59e0b;">User Profile</h2>
+
+  <div class="profile-field">
+    <strong>Full Name:</strong> {{ employee?.Name }}
+  </div>
+  <div class="profile-field">
+    <strong>Department:</strong> {{ employee?.Department }}
+  </div>
+  <div class="profile-field">
+    <strong>Role:</strong> {{ employee?.Role }}
+  </div>
+  <div class="profile-field">
+    <strong>Mobile:</strong> {{ employee?.Mobile }}
+  </div>
+  <div class="profile-field">
+    <strong>Email:</strong> {{ employee?.Email }}
+  </div>
+  <div class="profile-field">
+    <strong>Date of Birth:</strong> {{ employee?.DOB }}
+  </div>
+  <div class="profile-field">
+    <strong>Joining Date:</strong> {{ employee?.JoiningDate }}
+  </div>
+  <div class="profile-field">
+    <strong>PAN:</strong> {{ employee?.PAN }}
+  </div>
+  <div class="profile-field">
+    <strong>Aadhaar:</strong> {{ employee?.Aadhaar }}
+  </div>
+  <div class="profile-field" *ngIf="employee?.BankAccount">
+    <strong>Bank Account:</strong> {{ employee?.BankAccount }}
   </div>
 </div>
 
+<div *ngIf="error" class="error-message">
+  {{ error }}
+</div>

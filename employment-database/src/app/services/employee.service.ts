@@ -1,9 +1,6 @@
-
-
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Employee } from '../employees/employee.component';
 
 @Injectable({
   providedIn: 'root'
@@ -13,23 +10,58 @@ export class EmployeeService {
 
   constructor(private http: HttpClient) {}
 
-  // GET all employees
-  getEmployees(): Observable<Employee[]> {
-    return this.http.get<Employee[]>(`${this.apiUrl}/employees`);
+  /**
+   * === Employee APIs ===
+   */
+  getEmployees(): Observable<any[]> {
+    return this.http.get<any[]>(`${this.apiUrl}/employees`);
   }
 
-  // GET departments
+  createEmployee(employeeData: any): Observable<any> {
+    return this.http.post(`${this.apiUrl}/employees`, employeeData);
+  }
+
+  /**
+   * === Department APIs ===
+   */
   getDepartments(): Observable<any[]> {
     return this.http.get<any[]>(`${this.apiUrl}/departments`);
   }
 
-  // GET roles
+  createDepartment(departmentData: any): Observable<any> {
+    return this.http.post(`${this.apiUrl}/departments`, departmentData);
+  }
+
+  /**
+   * === Role APIs ===
+   */
   getRoles(): Observable<any[]> {
     return this.http.get<any[]>(`${this.apiUrl}/roles`);
   }
 
-  // POST new employee
-  createEmployee(employeeData: any): Observable<any> {
-    return this.http.post(`${this.apiUrl}/employees`, employeeData);
+  createRole(roleData: any): Observable<any> {
+    return this.http.post(`${this.apiUrl}/roles`, roleData);
+  }
+
+  /**
+   * === EmployeeRegister APIs ===
+   */
+  registerEmployee(data: any): Observable<any> {
+    return this.http.post(`${this.apiUrl}/emp-register`, data);
+  }
+
+  getRegisteredEmployees(): Observable<any[]> {
+    return this.http.get<any[]>(`${this.apiUrl}/emp-register`);
+  }
+
+  /**
+   * === EmployeeSalary APIs ===
+   */
+  getEmployeeSalaries(): Observable<any[]> {
+    return this.http.get<any[]>(`${this.apiUrl}/employeesalary`);
+  }
+
+  createEmployeeSalary(salaryData: any): Observable<any> {
+    return this.http.post(`${this.apiUrl}/employeesalary`, salaryData);
   }
 }
