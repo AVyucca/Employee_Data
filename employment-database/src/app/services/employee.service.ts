@@ -64,4 +64,15 @@ export class EmployeeService {
   createEmployeeSalary(salaryData: any): Observable<any> {
     return this.http.post(`${this.apiUrl}/employeesalary`, salaryData);
   }
+
+  /**
+   * === Data Entry APIs ===
+   */
+  getDataEntries(): Observable<any[]> {
+    return this.http.get<any[]>(`${this.apiUrl}/data-entry`);
+  }
+
+  createDataEntry(entryData: any): Observable<any> {
+    return this.http.post(`${this.apiUrl}/data-entry`, entryData);
+  }
 }

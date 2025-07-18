@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { EmployeeService } from '../services/employee.service';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-data-view',
@@ -7,27 +7,20 @@ import { EmployeeService } from '../services/employee.service';
   styleUrls: ['./data-view.component.css']
 })
 export class DataViewComponent implements OnInit {
-  employees: any[] = [];
-  isLoading = true;
-  errorMessage = '';
+  dataEntries: any[] = [];
 
-  constructor(private employeeService: EmployeeService) {}
+  constructor(private http: HttpClient) {}
 
   ngOnInit(): void {
-    this.loadEmployees();
-  }
-
-  loadEmployees(): void {
-    this.employeeService.getEmployees().subscribe({
-      next: (data) => {
-        this.employees = data;
-        this.isLoading = false;
-      },
-      error: (error) => {
-        console.error(error);
-        this.errorMessage = 'Failed to load employee data.';
-        this.isLoading = false;
-      }
-    });
+    this.http.get<any[]>('http://localhost:5000/api/data-entry')
+      .subscribe(
+        (data) => {
+           console.log('Fetched entries:', data);
+          this.dataEntries = data;
+        },
+        (error) => {
+          console.error('Error fetching employee data:', error);
+        }
+      );
   }
 }

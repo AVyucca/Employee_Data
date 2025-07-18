@@ -13,6 +13,8 @@ import { DataViewComponent } from './data-view/data-view.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
 import { EmpRegisterComponent } from './emp-register/emp-register.component';
 import { AppRoutingModule } from './app-routing.module';
+import { ViewRegisteredEmpComponent } from './view-registered-emp/view-registered-emp.component';
+
 
 const routes: Routes = [
   { path: '', component: LoginComponent },
@@ -21,7 +23,8 @@ const routes: Routes = [
   { path: 'add-entry', component: DataEntryComponent },
   { path: 'view-entry', component: DataViewComponent },
   { path: 'user-profile', component: UserProfileComponent },
-  { path: 'emp-register', component: EmpRegisterComponent }  // ✅ Added this route!
+  { path: 'emp-register', component: EmpRegisterComponent },
+  { path:'view-registered-emp',component:ViewRegisteredEmpComponent}  // ✅ Added this route!
 ];
 
 @NgModule({
@@ -33,7 +36,8 @@ const routes: Routes = [
     DataEntryComponent,
     DataViewComponent,
     UserProfileComponent,
-    EmpRegisterComponent
+    EmpRegisterComponent,
+    ViewRegisteredEmpComponent
   ],
   imports: [
     BrowserModule,
@@ -47,4 +51,3 @@ const routes: Routes = [
   bootstrap: [AppComponent]
 })
 export class AppModule { }
-

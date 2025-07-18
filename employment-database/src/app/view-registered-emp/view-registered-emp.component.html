@@ -1,0 +1,30 @@
+<div class="emp-register-wrapper">
+  <div class="emp-register-card">
+    <h2 class="heading-orange">Registered Employees</h2>
+
+    <table *ngIf="employees.length > 0" class="emp-table">
+      <thead>
+        <tr>
+          <th class="blue-header">#</th>
+          <th class="blue-header">Full Name</th>
+          <th class="blue-header">Email</th>
+          <th class="blue-header">Mobile</th>
+          <th class="blue-header">Department</th>
+          <th class="blue-header">Role</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let emp of employees; let i = index">
+          <td>{{ i + 1 }}</td>
+          <td>{{ emp.Name }}</td>
+          <td>{{ emp.Email }}</td>
+          <td>{{ emp.Mobile }}</td>
+          <td>{{ emp.Department }}</td>
+          <td>{{ emp.Role }}</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <p *ngIf="employees.length === 0">No employees found.</p>
+  </div>
+</div>

@@ -1,34 +1,40 @@
-<div class="view-container">
-  <h2>Employee Details</h2>
-  
-  <div *ngIf="isLoading">Loading...</div>
-  <div *ngIf="errorMessage">{{ errorMessage }}</div>
-  
-  <table *ngIf="!isLoading && employees.length">
-    <thead>
-      <tr>
-        <th>Name</th>
-        <th>DOB</th>
-        <th>Mobile</th>
-        <th>Joining Date</th>
-        <th>PAN</th>
-        <th>Aadhar</th>
-        <th>Bank Details</th>
-        <th>Salary</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let emp of employees">
-        <td>{{ emp.name }}</td>
-        <td>{{ emp.dob }}</td>
-        <td>{{ emp.mobile }}</td>
-        <td>{{ emp.joiningDate }}</td>
-        <td>{{ emp.pan }}</td>
-        <td>{{ emp.aadhar }}</td>
-        <td>{{ emp.bankDetails }}</td>
-        <td>{{ emp.salary }}</td>
-      </tr>
-    </tbody>
-  </table>
+<h2 style="text-align:center; color: #2196f3;">Employee Records</h2>
+
+<div *ngIf="dataEntries.length === 0">
+  <p style="text-align: center;">No employee records found.</p>
 </div>
 
+<table *ngIf="dataEntries.length > 0" border="1" style="margin: auto; width: 90%; text-align: center;">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Name</th>
+      <th>DOB</th>
+      <th>Mobile</th>
+      <th>Joining Date</th>
+      <th>PAN</th>
+      <th>Aadhaar</th>
+      <th>Bank Account</th>
+      <th>Department</th>
+      <th>Role</th>
+      <th>Salary</th>
+      <th>Created At</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let entry of dataEntries">
+      <td>{{ entry.id }}</td>
+      <td>{{ entry.name }}</td>
+      <td>{{ entry.dob }}</td>
+      <td>{{ entry.mobile }}</td>
+      <td>{{ entry.joining_date }}</td>
+      <td>{{ entry.pan }}</td>
+      <td>{{ entry.aadhaar }}</td>
+      <td>{{ entry.bank_account }}</td>
+      <td>{{ entry.department }}</td>
+      <td>{{ entry.role }}</td>
+      <td>{{ entry.salary }}</td>
+      <td>{{ entry.created_at }}</td>
+    </tr>
+  </tbody>
+</table>

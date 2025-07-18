@@ -1,104 +1,75 @@
-/* Background for the whole page */
 .entry-wrapper {
-  background-color: #f8f9fb;
-  min-height: 100vh;
   display: flex;
-  align-items: center;
   justify-content: center;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  align-items: center;
+  min-height: 100vh;
+  background: #f2f6fc;
+  padding: 40px 20px;
 }
 
-/* White Card Container */
 .entry-container {
-  background-color: #ffffff;
-  padding: 40px 30px;
-  border-radius: 16px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-  max-width: 500px;
+  background: #ffffff;
+  padding: 35px 30px;
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
   width: 100%;
+  max-width: 500px;
 }
 
-/* Heading */
 .entry-container h2 {
   text-align: center;
-  font-size: 2rem;
-  color: #2957a4;
-  margin-bottom: 24px;
-  font-weight: 700;
+  font-size: 1.7rem;
+  margin-bottom: 25px;
+  color: #2c3e50;
 }
 
-/* Form Layout */
-form {
-  display: flex;
-  flex-direction: column;
-}
-
-/* Each Form Group */
 .form-group {
-  margin-bottom: 16px;
   display: flex;
   flex-direction: column;
+  margin-bottom: 16px;
 }
 
-/* Label Style */
 .form-group label {
+  font-weight: 600;
   margin-bottom: 6px;
-  font-size: 0.95rem;
-  color: #444;
+  color: #333;
 }
 
-/* Input Style */
+.required-star {
+  color: red;
+  margin-left: 4px;
+}
+
 .form-group input {
-  padding: 10px 14px;
+  padding: 10px 12px;
+  font-size: 1rem;
   border: 1px solid #ccc;
   border-radius: 8px;
-  font-size: 1rem;
-  transition: border-color 0.3s;
 }
 
-.form-group input:focus {
-  border-color: #81a8ea;
+input:focus {
+  border-color: #007bff;
   outline: none;
 }
 
-/* Button Group */
 .button-group {
   display: flex;
-  flex-direction: column;
-  gap: 12px;
-  margin-top: 20px;
+  justify-content: center;
+  margin-top: 24px;
 }
 
-/* Save Button */
-.button-group button[type="submit"] {
-  border: none;
-  padding: 12px 0;
-  border-radius: 8px;
+.button-group button {
+  padding: 12px 24px;
   font-size: 1rem;
   font-weight: 600;
+  border: none;
+  border-radius: 8px;
+  background: linear-gradient(to right, #5e97f6, #fbc27e);
+  color: white;
   cursor: pointer;
-  color: #ffffff;
-  background: linear-gradient(90deg, #81a8ea, #ebb07c);
   transition: opacity 0.3s ease;
 }
 
-.button-group button[type="submit"]:hover {
+.button-group button:hover {
   opacity: 0.9;
-}
-
-/* Cancel Button */
-.button-group .cancel-btn {
-  border: 1px solid #ccc;
-  background-color: #f4f4f4;
-  color: #444;
-  padding: 12px 0;
-  border-radius: 8px;
-  font-size: 1rem;
-  font-weight: 600;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-
-.button-group .cancel-btn:hover {
-  background-color: #e2e2e2;
 }

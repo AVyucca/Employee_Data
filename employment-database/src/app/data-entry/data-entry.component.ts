@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-data-entry',
@@ -7,38 +8,39 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
   styleUrls: ['./data-entry.component.css']
 })
 export class DataEntryComponent implements OnInit {
-  entryForm!: FormGroup;
+  entryForm!: FormGroup;  // ✅ Add exclamation to fix error
 
-  constructor(private fb: FormBuilder) {}
+  constructor(private fb: FormBuilder, private http: HttpClient) {}
 
   ngOnInit(): void {
     this.entryForm = this.fb.group({
       name: ['', Validators.required],
       dob: ['', Validators.required],
-      mobile: ['', [Validators.required, Validators.pattern('^[0-9]{10}$')]],
-      joiningDate: ['', Validators.required],
+      mobile: ['', Validators.required],
+      joining_date: ['', Validators.required],
       pan: ['', Validators.required],
-      aadhaar: ['', [Validators.required, Validators.pattern('^[0-9]{12}$')]],
-      bankAccount: ['', Validators.required],
+      aadhaar: ['', Validators.required],
+      bank_account: ['', Validators.required],
       department: ['', Validators.required],
       role: ['', Validators.required],
-      salary: ['', [Validators.required, Validators.min(0)]],
+      salary: ['', Validators.required]
     });
   }
 
   onSubmit(): void {
     if (this.entryForm.valid) {
-      console.log('Form submitted:', this.entryForm.value);
-      alert('Record saved successfully!');
-      this.entryForm.reset();
+      this.http.post('http://localhost:5000/api/data-entry', this.entryForm.value).subscribe({
+        next: res => {
+          alert('Employee added successfully!');
+          this.entryForm.reset();
+        },
+        error: err => {
+          console.error('Error:', err);
+          alert('Error occurred while adding employee.');
+        }
+      });
     } else {
-      alert('Please fill all required fields correctly.');
-    }
-  }
-
-  onCancel(): void {
-    if (confirm('Are you sure you want to cancel? All data will be cleared.')) {
-      this.entryForm.reset();
+      alert('Please fill out all required fields.');
     }
   }
 }

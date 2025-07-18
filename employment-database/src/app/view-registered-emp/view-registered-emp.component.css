@@ -1,0 +1,59 @@
+.emp-register-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 30px;
+  background-color: #f2f2f2;
+  min-height: 100vh;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.emp-register-card {
+  background: white;
+  padding: 30px 40px;
+  border-radius: 12px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 1000px;
+}
+
+.heading-orange {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #ff6b00; /* Orange */
+  font-size: 26px;
+  font-weight: bold;
+}
+
+.emp-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
+}
+
+.emp-table th,
+.emp-table td {
+  border: 1px solid #ddd;
+  padding: 12px;
+  text-align: left;
+  font-size: 15px;
+}
+
+.emp-table th.blue-header {
+  background-color: #e6f0ff;
+  color: #0056b3; /* Blue */
+}
+
+.emp-table tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+.emp-table tr:hover {
+  background-color: #f1f1f1;
+}
+
+p {
+  text-align: center;
+  color: #666;
+  margin-top: 20px;
+}
