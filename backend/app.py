@@ -6,7 +6,7 @@ import hashlib
 app = Flask(__name__)
 CORS(app)
 
-# Database configuration
+# === Database Config ===
 db_config = {
     'host': 'localhost',
     'user': 'root',
@@ -14,7 +14,7 @@ db_config = {
     'database': 'employeedata'
 }
 
-# Function to get DB connection
+# === Get DB Connection ===
 def get_db_connection():
     return mysql.connector.connect(**db_config)
 
@@ -120,7 +120,7 @@ def create_employee_salary():
     conn.close()
     return jsonify({'message': 'Salary entry created successfully'}), 201
 
-# === EMPLOYEE REGISTER APIs ===
+# === EMPLOYEE REGISTER (Signup) ===
 @app.route('/api/emp-register', methods=['POST'])
 def register_employee():
     data = request.get_json()
@@ -179,5 +179,88 @@ def get_data_entries():
     conn.close()
     return jsonify(data_entries)
 
+# === LOGIN API ===
+@app.route('/api/emp-login', methods=['POST'])
+def login_employee():
+    data = request.get_json()
+    email = (data.get('Email') or data.get('email') or '').strip().lower()
+    password = (data.get('Password') or data.get('password') or '').strip()
+
+    if not email or not password:
+        return jsonify({'message': 'Missing credentials'}), 400
+
+    hashed_password = hashlib.sha256(password.encode()).hexdigest()
+    print("Trying login with:")
+    print("Email:", email)
+    print("Hashed password:", hashed_password)
+
+    try:
+        conn = get_db_connection()
+        cursor = conn.cursor(dictionary=True)
+        cursor.execute(
+            "SELECT * FROM EmployeeRegister WHERE LOWER(Email) = %s AND Password = %s",
+            (email, hashed_password)
+        )
+        user = cursor.fetchone()
+        cursor.close()
+        conn.close()
+
+        if user:
+            print("User found:", user)
+            return jsonify({'message': 'Login successful', 'user': user})
+        else:
+            print("Invalid credentials")
+            return jsonify({'message': 'Invalid credentials'}), 401
+
+    except Exception as e:
+        print("Login error:", str(e))
+        return jsonify({'message': 'Internal server error'}), 500
+
+
+# === Emily Test Login (for debug) ===
+@app.route('/api/test-emily-login', methods=['POST'])
+def test_emily_login():
+    data = request.get_json()
+    email = (data.get('Email') or data.get('email') or '').strip().lower()
+    password = (data.get('Password') or data.get('password') or '').strip()
+
+    if email == "emily@yuccasolutions.com" and password == "emily123":
+        conn = get_db_connection()
+        cursor = conn.cursor(dictionary=True)
+        cursor.execute("SELECT * FROM EmployeeRegister WHERE LOWER(Email) = %s", (email,))
+        user = cursor.fetchone()
+        cursor.close()
+        conn.close()
+
+        if user:
+            return jsonify({'message': 'Login successful (Emily test)', 'user': user})
+        else:
+            return jsonify({'message': 'Emily not found in DB'}), 404
+
+    return jsonify({'message': 'Invalid test credentials'}), 401
+
+# === Create Admin on Startup ===
+@app.before_request
+def create_default_admin():
+    conn = get_db_connection()
+    cursor = conn.cursor()
+    cursor.execute("SELECT * FROM EmployeeRegister WHERE Email = 'admin@example.com'")
+    if not cursor.fetchone():
+        hashed_password = hashlib.sha256("admin123".encode()).hexdigest()
+        cursor.execute("""
+            INSERT INTO EmployeeRegister 
+            (Name, Department, Role, Mobile, Email, DOB, JoiningDate, PAN, Aadhaar, BankAccount, Password)
+            VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
+        """, (
+            'Admin User', 'Admin Department', 'admin', '9876543210',
+            'admin@example.com', '1990-01-01', '2020-01-01',
+            'ABCDE1234F', '123456789012', '1234567890', hashed_password
+        ))
+        conn.commit()
+        print("✅ Default admin account created.")
+    cursor.close()
+    conn.close()
+
+# === RUN APP ===
 if __name__ == '__main__':
     app.run(debug=True)
